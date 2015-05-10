@@ -1,0 +1,285 @@
+extends corporate-layout
+
+block content
+  a#home
+  
+  // ========== BANNER START ==========
+
+  #slides
+    img(src='images/corporate/map.jpg', alt='')
+    .tint
+      .welcome.text-center
+        h1 Welcome to Boshi Panda
+        p Chinese animated storybooks your kids will love
+        i.fa.fa-angle-down
+  // ========== BANNER END ==========
+
+
+  // ========== MENU START ==========
+  .navbar.navbar-default.navbar-fixed-top
+    .container
+      .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='/')
+          img.img-responsive(src='images/avatars/jiejie_head.png', alt='Jie Jie and Friends')
+          h3 Boshi Panda
+      .navbar-collapse.collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='#home') HOME
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | ABOUT
+              b.caret
+            ul.dropdown-menu
+              li
+                a(href='#mission') Mission
+              li
+                a(href='#staff') Characters
+              li
+                a(href='#testimonials') Testimonials
+              li
+                a(href='#activities') Books
+              li
+                a(href='#membership') Prices
+              li 
+                a(href='#contact') Contact
+          li
+            a(href='/portal') SIGNUP
+          li
+            a(href='/portal') LOGIN
+  //========== MENU END ==========
+    
+  //========== ROOMS START ==========
+  #rooms
+    .container.text-center
+      .row.no-fade
+        .col-sm-4
+          .box.background.background1
+            h3  Chinese books your kids want to read
+            p
+              | Even reluctant Mandarin learners cannot resist our electronic books! 
+              | Your kids will be drawn to our exciting stories, animation and sound effects and will quickly forget how much they dislike Chinese .
+          .icon.img-circle
+            span.glyphicon.glyphicon-gift
+          .arrow.background.background1
+        .col-sm-4
+          .box.background.background2
+            h3 Helps your kids effortlessly learn vocab
+            p
+              | Your kids' struggle to learn new Chinese words ends now. 
+              | By just reading each book for 15 minutes a week, your kids will effortlessly learn 5 key words and be exposed to more than 50. 
+          .icon.img-circle
+            span.glyphicon.glyphicon-pencil
+          .arrow.background.background2
+        .col-sm-4
+          .box.background.background3
+            h3  Bond with your kids over reading
+            p
+              | Reading Chinese books to your kids stops being a chore with text highlighting and voice over. You can now focus on enjoying the stories together, instead of worrying about the right pronunciation. 
+          .icon.img-circle
+            span.glyphicon.glyphicon-heart
+          .arrow.background.background3
+  // ========== ROOMS END ==========
+
+
+  // ========== MISSION START ==========
+  section#mission.background.background1.background-image
+    .container
+      .row.text-center
+        .col-sm-12
+          h2 Our Mission
+          h5 WHAT'S OUR GOAL
+
+      .row
+        .col-sm-6
+          p
+            | Jie Jie & Friends helps your 4-8 year old kids fall in love with reading Chinese animated books. 
+            | We know why your kids don’t enjoy reading Chinese books and we can’t blame them. Honestly, how many of us get excited about unentertaining and wordy stories? 
+          p
+            | Jie Jie & Friends wants to change that. Our entertaining digital books feature loveable characters, an exciting fantasy story, cute animation and realistic voice over. We guarantee your kids will fall in love with the books.              
+        .col-sm-6
+          p
+            | Our books are educational too. Instead of driving your kids away with flashcards and word drills, use Jie Jie and Friends to effortlessly revise with your kids. Very soon they will amaze their Chinese teachers with their quick progress.  
+          p
+            | Let's kick your kids’ love for reading Chinese books today!         
+      .row.text-center
+        .col-sm-12
+          p  
+          p
+            //- a.btn.btn-lg.btn-transparent(href='/portal') SIGN UP FOR A FREE TRIAL
+  //========== MISSION END ==========
+
+  // ========== STAFF START ==========
+  section#staff
+    .container.text-center
+      .row
+        .col-md-8.col-md-offset-2
+          h2 About Our Stories
+          h5 GO ON AN ADVENTURE OF A LIFETIME
+          .video-container
+            iframe.youtube(src="//www.youtube.com/embed/wTXhDR0nlmo", frameborder="0", allowfullscreen)
+          br
+          p
+            | Jie Jie and his friends are going on an adventure of a lifetime! Jie Jie the young magician is mysteriously pulled into a fantasy world, where his toy rabbit comes to life and he meets a mischievous fairy. Along they way, the trio meet a treasure-seeking panda, and is drawn into his quest to find 3 lost jewels…
+      .row-margin.owl-carousel
+        div
+          .item
+            img(src='/images/corporate/jiejie.png', alt='jie jie')
+            h4 Jie Jie
+            p.character
+              | Jie Jie is a young magician who accidentally enters a magical world. He inspires his friends to never give up when the going gets tough.
+
+        div
+          .item
+            img(src='/images/corporate/xiaojiling.png', alt='xiao ji ling')
+            h4 Xiao Ji Ling
+            p.character
+              | Xiao Ji Ling is a mischievous but kind hearted and loyal fairy who can transform into different animals!
+
+        div
+          .item
+            img(src='/images/corporate/haidaoxiongmao.png', alt='hai dao xiong mao')
+            h4 Hai Dao Xiong Mao
+            p.character
+              | Hai Dao Xiong Mao is a ship captain who sails the seas in search for treasure. Courageous and curious, he is always ready for adventure!
+
+        div
+          .item
+            img(src='/images/corporate/yuyu.png', alt='yuy u')
+            h4 Yu Yu
+            p.character
+              | Yu Yu is Jie Jie's loyal sidekick who demonstrates why it is important to be willing to take responsibility when one makes mistakes. 
+
+  //========== STAFF END ==========    
+
+  //========== TESTIMONIALS START ==========
+  section#testimonials.background.background2.background-image
+    .container
+      .row.text-center
+        .col-sm-12
+          h2 Testimonials
+          h5 WHAT PARENTS SAY ABOUT US
+      .row.text-center
+        .col-sm-12.owl-carousel
+          div
+            .item
+              div
+                img(src='images/testimonials/kyle.png')
+              blockquote
+                | "The stories created by KidStartNow encourage imagination and creativity. The children are amazed every week."
+                small 
+                  a(href='http://miracule.blogspot.sg/2014/03/what-my-child-learns-from-his.html') Ting
+                    | , Mother of Kyle, Mommy Blogger (Miracule)
+
+      .row.text-center
+        .col-sm-12
+          p  
+          p
+            //- a.btn.btn-lg.btn-transparent(href='/portal') JOIN US TODAY
+
+  //========== TESTIMONIALS END ==========
+
+  //========== ACTIVITIES START ==========
+  section#activities
+    .container
+      .row
+        .col-sm-12
+          h2.text-center Our Books
+          h5.text-center SUITABLE FOR DIFFERENT AGES
+          //
+             Tabs Start
+          ul.nav.nav-tabs.text-center
+            li.active
+              a(href='#Elementary', data-toggle='tab') ELEMENTARY
+            li
+              a(href='#Intermediate', data-toggle='tab') INTERMEDIATE
+          .tab-content
+            #Elementary.tab-pane.fade.in.active
+              .col-sm-4
+                p
+                  img.img-responsive(src='images/corporate/elementary.jpg', alt='elementary')
+              .col-sm-8
+                h4 Your 4-6 year old child will:
+                ul
+                  li.list_check Become more interested in Chinese 
+                  li.list_check Effortlessly understand themes like colours and actions using animation
+                  li.list_check Effectively recognise 4-5 new words in each book
+                  li.list_check Be exposed to more than 30 characters in each book
+                  li.list_check Learn quickly with support from text highlighting and voice over
+                  li.list_check Easily read our books from your computer, phone or tablet 
+            #Intermediate.tab-pane.fade
+              .col-sm-4
+                p
+                  img.img-responsive(src='images/corporate/intermediate.jpg', alt='intermediate')
+              .col-sm-8
+                h4 Your 7-9 year old child will:
+                ul
+                  li.list_check Become more interested in Chinese 
+                  li.list_check Effectively recognise 4-5 new words in each book
+                  li.list_check Be exposed to more than 50 words in each book
+                  li.list_check Expand their vocabulary with idioms (成语) 
+                  li.list_check Learn quickly with support from text highlighting and voice over 
+                  li.list_check Easily read our books from your computer, phone or tablet 
+          //Tabs End
+  //========== ACTIVITIES END ==========
+
+  //========== MEMBERSHIP START ==========
+  section#membership.background.background3.background-image
+    .container
+      .row.text-center
+        .col-sm-12
+          h2 Membership
+          h5 PRICES & PACKAGES
+      .row.text-center
+        .col-xs-10.col-xs-offset-1.col-sm-6.col-sm-offset-3.col-md-6.col-md-offset-3.col-lg-4.col-lg-offset-4
+          ul.price-table
+            li.title Books Package
+            li.price
+              //- div.line-through.old-price S$9.99
+              div S$9.99
+            li.period per month
+            li Three new storybooks a month
+            li Unlimited access to old storybooks
+            li Learn four to five keywords per book
+            li Curriculum based on MOE Primary School syllabus
+            li
+              a.btn.btn-success.btn-lg(href='/portal') JOIN FREE TRIAL!
+
+  //========== MEMBERSHIP END ==========
+
+
+  //========== CONTACT START ==========
+  section#contact
+    .container
+      .row.text-center
+        .col-sm-12
+          h2 Contact Us
+          h5 DROP US A LINE
+          //Form Start
+          form#signupForm(role='form')
+            #contactSuccess.alert.alert-success.hidden
+              strong Success! 
+              | Your message has been sent to us.            
+            #contactError.alert.alert-error.hidden
+              strong Error! 
+              | Please email us at enquiry@kidstartnow.com instead.                
+            .form-group.col-sm-6.left
+              input#name.form-control(type='text', placeholder='Name')
+              label.error.hidden(for='name') This field is required.
+            .form-group.col-sm-6.left
+              input#email.form-control(type='email', placeholder='Email')
+              label.error.hidden(for='email') This field is required.
+            .form-group.col-sm-12.left
+              textarea#comments.form-control(rows='6', placeholder='Comments')
+              label.error.hidden(for='comments') This field is required.
+            button.btn.btn-primary.btn-lg(type='submit') SUBMIT
+            div.loading.hidden
+              img(src="../images/loading.gif")
+              span &nbsp;&nbsp;Loading...               
+          //Form End
+          p &nbsp;
+  //========== CONTACT END ==========

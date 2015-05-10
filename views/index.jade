@@ -1,0 +1,110 @@
+doctype html
+// [if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]
+// [if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]
+// [if IE 8]>         <html class="no-js lt-ie9"> <![endif]
+// [if gt IE 8]><!
+html.no-js
+  //<![endif]
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+    base(href="/portal")
+    title Boshi Panda | Help Your Kid Love Chinese Using Animated Storybooks
+
+    meta(name='description', content='Help your child love learning Chinese through our Chinese animated storybooks')
+    meta(name='author', content='KidStartNow')
+    meta(name='keywords', content='Chinese Animated Storybooks - Help Your Kid Love Chinese Today, Boshi Panda')
+
+    //- link(href='http://fonts.googleapis.com/css?family=Bangers', rel='stylesheet' type='text/css')
+    // Place favicon.ico and apple-touch-icon.png in the root directory
+    <link rel="stylesheet" href="styles/vendor.css"/>
+    <link rel="stylesheet" href="styles/3229d1a2.bootstrap.css"/>
+    <link rel="stylesheet" href="styles/a5896f90.main.css"/>
+    <link rel="stylesheet" href="styles/ea4559a7.styles.css"/>
+    <link rel="stylesheet" href="styles/de882eb8.custom.css"/>
+  body.ng-cloak(ng-app="portalApp", ng-cloak)
+    div#fb-root
+    script.
+      if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+         alert("We do not support your browser (IE) currently. Please use FireFox , Chrome, or Safari."); 
+      } 
+
+      (function(w, d, s, id) {
+        w.fbApiInit = false;
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=537293219738247";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        w.fbAsyncInit = function(){
+          FB.init({ appId  : '#{ appid }', xfbml  : true });
+          FB.getLoginStatus(function(response){
+            w.fbApiInit = true;
+            angular.element($('.main-container')).scope().$apply();
+          });
+        }
+
+      }(window, document, 'script', 'facebook-jssdk'));
+    
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      div.container(ng-controller='NavCtrl')
+        div.navbar-header
+          button.navbar-toggle(type='button', ng-click='isCollapsed = !isCollapsed')
+            span.sr-only Toggle Navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/portal') 
+            img(ng-src='{{ data.avatarSrc }}') 
+          div.name
+            h4.capitalize {{ data.currentKid.firstName }}
+          div.coin
+            img(src='/images/coin.png')
+            p {{ data.currentKid.coins }}
+
+        div.navbar-collapse.collapse(collapse='isCollapsed')
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='/portal', ng-click='isCollapsed = true') STORYBOOKS
+            //- li
+            //-   a(href='/portal/active') Activce Code
+            //- li
+            //-   a(href='/portal/store', ng-click='isCollapsed = true') STORE
+
+            li.dropdown
+              a.dropdown-toggle(href='') 
+                | SETTINGS
+                b.caret
+              ul.dropdown-menu
+                li(ng-repeat='kid in data.kids')
+                  a.capitalize(ng-href='', ng-click='changeCurrentKid( kid._id )') 
+                    | {{ kid.firstName }} &nbsp;
+                    span.glyphicon.glyphicon-ok(ng-show='kid === data.currentKid')
+                li.divider
+                li
+                  a(ng-href='/portal/addkid', ng-click='') Add New Kid
+                li
+                  a(ng-href='/portal/settings', ng-click='') Settings 
+                li.divider
+                //- li
+                //-   a(ng-href='/portal/store', ng-click='') Buy / Activate Books
+                li
+                  a(ng-href='', ng-click='logout()') Logout
+
+
+    div.container.main-container.white-background(ng-view)
+
+    //Google Analytics
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-41177154-2', 'jiejieandfriends.com');
+      ga('send', 'pageview');
+
+    <script src="scripts/24052107.vendor.js"></script>
+    <script src="scripts/1ed4ee39.scripts.js"></script>
+    

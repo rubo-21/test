@@ -1,0 +1,53 @@
+doctype html
+// [if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]
+// [if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]
+// [if IE 8]>         <html class="no-js lt-ie9"> <![endif]
+// [if gt IE 8]><!
+html.no-js
+  //<![endif]
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+    base(href="/")
+    title Admin page
+    meta(name="description", content="")
+    meta(name="viewport", content="width=device-width")
+    // Place favicon.ico and apple-touch-icon.png in the root directory
+    <link rel="stylesheet" href="styles/vendor.css"/>
+    <link rel="stylesheet" href="styles/a5896f90.main.css"/>
+  body(ng-app="adminApp")
+    div(ng-view)
+
+    <script src="scripts/24052107.vendor.js"></script>
+
+    script.
+      angular.module('adminApp', [
+        'ngCookies',
+        'ngResource',
+        'ngSanitize',
+        'ngRoute',
+      ])
+        .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+          $routeProvider
+            .when('/admin', {
+              templateUrl: '/admin-partials/main',
+              controller: 'MainCtrl',        
+            })
+            .otherwise({
+              redirectTo: '/admin'
+            })
+
+          $locationProvider.html5Mode(true);
+        }])        
+    
+      angular.module('adminApp')
+        .controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+
+          $scope.updateBooksRecords = function() {
+            console.log('clicking');
+            $http.post('/api/admin/booksRecords').success(function() {
+              console.log('yay');
+            })
+          }
+
+        }])

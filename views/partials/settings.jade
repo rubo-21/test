@@ -1,0 +1,14 @@
+div.settings
+  label English Subtitles*
+  br
+  select(ng-model='data.currentKid.subtitles', required)
+    option(ng-repeat='o in data.subtitleOptions', ng-selected='data.currentKid.subtitles === o.val', value='{{ o.val }}') {{ o.text }}
+  br
+  i *Option to turn off subtitles available from Book 10 onwards
+
+  hr
+  a.btn.btn-primary(ng-click='saveSettings()') {{ data.buttonText }}
+  p.success(ng-show='data.success')
+    | Settings Saved
+  br
+  br  

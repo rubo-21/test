@@ -1,0 +1,66 @@
+extends corporate-layout
+
+block content
+  .row.no-fade
+    .col-sm-offset-2.col-sm-8
+      h1.center Entry to Jie Jie and Friends is by invitation only
+      br
+      p
+        | Jie Jie and Friends is the members-only portal that helps your kid love learning Chinese via exciting animated storybooks. 
+        | Members get to access all our current books, and stay up to date with our new books (2-3 per month). 
+
+      p
+        | If you currently have an account and are trying to access from someone else's device, please log out of that person's facebook account (web browser),
+        | and try again.
+      p
+        | If you don't have an account and want to join, you need an invitation from another member or you can join the waiting list. 
+        | If you have an questions, please email 
+        a(href='mailto:enquiry@kidstartnow.com') enquiry@kidstartnow.com
+        | .
+      div.yes-container
+        img(src='/images/corporate/yes.jpg')
+      br
+    .col-sm-offset-2.col-sm-8
+      form.form.referral
+        .form-group
+          label Referral Code
+          input.form-control.referralCode(type='text', name='referralCode', required)
+          p.help-block.hidden
+            | Invalid or empty referral code. Would you like to join the waiting list?
+        button.btn.btn-lg.btn-primary(type='submit') Enter referral code
+    
+      hr
+      form.form.waiting-list
+        p If you don't have a referral code, you can join our waiting list by emailing 
+          a(href='mailto:enquiry@kidstartnow.com') enquiry@kidstartnow.com 
+          | and we will contact you as soon as we open up more slots.
+        //- .form-group
+        //-   label Email Address
+        //-   input.form-control(type='email', name='email', required)
+        //-   p.help-block.hidden
+        //-     | Invalid email
+        //- button.btn.btn-lg.btn-primary(type='submit') Sign up for waiting list
+
+  .row.no-fade
+    .col-sm-offset-2.col-sm-8
+      hr
+      | Have an account? 
+      a.text-center.new-account(href='/auth/facebook') Log in.
+  script.
+    $(document).ready(function() {
+      $('.referral').submit(function(event) {
+        event.preventDefault();
+        $('.referral .help-block').addClass('hidden');
+        
+        var val = $('.referral .referralCode').val();
+        if (val !== '') {
+          $.post('/referralcode', {referralCode: val}, function(data) {
+            //redirect automatically
+            window.location = '/portal';
+          })
+          .fail(function() {
+            $('.referral .help-block').removeClass('hidden');  
+          })
+        }
+      });
+    }); 

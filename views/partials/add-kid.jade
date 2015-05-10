@@ -1,0 +1,42 @@
+div.add-kid
+  h3 Add Your Kid's Information
+  //- set up the client side email, this page should require parent logged in
+  //- span#parentEmail(style="display: none;") #{locals.req.user.email}
+  form(name='addKidForm', role='form', ng-submit='submitForm(addKidForm)', novalidate)
+
+    div.form-group(ng-class='{"has-error": submitted && addKidForm.firstName.$invalid}')
+      label(for='firstName') First Name
+      input.form-control(name='firstName', type='text', placeholder='First Name', ng-model='data.kid.firstName', required)
+      label.control-label(for='firstName', ng-show='submitted && addKidForm.firstName.$invalid') This field is required. 
+
+    div.form-group(ng-class='{"has-error": submitted && addKidForm.lastName.$invalid}')
+      label(for='lastName') Last Name
+      input.form-control(name='lastName', type='text', placeholder='Last Name', ng-model='data.kid.lastName', required)
+      label.control-label(for='lastName', ng-show='submitted && addKidForm.lastName.$invalid') This field is required. 
+    p.control-label.error(ng-show='submitted && data.sameChild') You have already registered this name.
+
+    div.form-group(ng-class='{"has-error": submitted && addKidForm.sex.$invalid}')
+      label(for='sex') Gender*
+      br
+      select(name='sex', ng-model='data.kid.sex', required)
+        option(value='male') Male
+        option(value='female') Female
+      br
+      label.control-label(for='sex', ng-show='submitted && addKidForm.sex.$invalid') This field is required. 
+
+    .form-group(ng-class='{"has-error": submitted && addKidForm.birthday.$invalid}')
+      label(for='birthday') Birthday*
+      br
+      birthday(date-fields='data.birthday')
+      label.control-label.error.birthday(for='birthday', ng-show='submitted && !data.kid.birthday') This field is required. 
+
+    .div
+      h4 Choose your favourite character!
+      div.avatar.center(ng-repeat='avatar in data.avatars', ng-click='selectAvatar(avatar)', ng-class='{active: data.kid.avatar === avatar.avatar}')
+        img(ng-src='/images/avatars/{{ avatar.src }}')
+        p.name {{avatar.name}}
+        br.visible-xs
+      p.control-label.error(ng-show='submitted && !data.kid.avatar') Please choose a character.
+
+
+    input.btn.btn-primary(type='submit', value='Create Your Kid\'s Account!')    

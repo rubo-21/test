@@ -1,0 +1,39 @@
+div.store(ng-controller='StoreCtrl', ng-show='data.reAuth')
+  div.row.no-fade(white-space)
+  div.col.md-12
+    select(ng-model='data.termSelected', ng-options='term.text for term in data.terms', required)
+
+  div#feature.col-md-12.feature-container
+    div
+      h3 The Adventures of Jie Jie
+      h4 {{ data.storySelected.term }} (9 books)
+    div
+      div.col-md-6.image-container
+        img(src='/images/stories/{{ data.storySelected.thumbnailsSrc[0] }}')
+      div.col-md-6.text-container
+        div
+          h4 {{ data.storySelected.termIndex + 1 }}. {{ data.storySelected.chineseTitle }} ({{ data.storySelected.title }})
+          p 
+            b Sypnosis: 
+            | {{ data.storySelected.description }}
+          p.words-learned
+            b Words Learned: 
+            | {{ data.storySelected.keywordsTaughtAcrossAllLevels.join(', ') }}
+        div    
+          a(ng-click="onCheckoutTerm()")
+            button.btn.btn-primary Buy Term $19.99
+          br
+          br
+          a(ng-click="onCheckoutStory()")
+            button.btn.btn-primary Buy Story $2.99
+          br
+  br
+
+  ul.episode-list
+    li(ng-repeat='story in data.stories | filter:{term: data.termSelected.text}', ng-click='selectStory(story)', ng-class='{selected: data.storySelected === story}')
+      div(style='padding: 10px')
+        img(src='/images/stories/{{ story.thumbnailsSrc[0] }}', style='width: 150px; float: left')
+        div.cf(style='margin-left:25%')
+          b {{ $index + 1 }}. {{ story.chineseTitle }} ({{ story.title }}) 
+          | {{ story.description }}
+        h3.purchased(ng-show='!story.availableForPurchase') Already Purchased

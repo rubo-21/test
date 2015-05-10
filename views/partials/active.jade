@@ -1,0 +1,17 @@
+div.books-index(ng-controller='ActiveCtrl')
+  div.row.no-fade(white-space)
+
+  .col-sm-offset-2.col-sm-8
+    br
+    br
+    h2 Active your subscription code
+
+    form.form.referral
+      .form-group
+        label Subscription Code
+        input.form-control.referralCode(type='text', name='hashCode', ng-model="hashCode",  required)
+        p.help-block.hidden
+          | Invalid or empty referral code. Would you like to join the waiting list?
+      button.btn.btn-lg.btn-primary(type='submit', ng-click="onValidate()") Active subscription code
+    br
+    br

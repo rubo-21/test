@@ -1,0 +1,21 @@
+div.books-index(ng-controller='BooksIndexCtrl')
+  div.row.no-fade(white-space, selector-to-watch='#white-space', callback='test()')
+    div.col-xs-12.visible-xs.term-container-xs
+      select(ng-model='data.termSelected', ng-options='term.text for term in data.terms', required)
+
+    div.col-sm-12.hidden-xs.term-container-sm
+      select(ng-model='data.termSelected', ng-options='term.text for term in data.terms', required)      
+
+    div(ng-repeat='story in data.stories | filter:{term: data.termSelected.text} | orderBy: "index"', ng-init='long = false')
+      div#white-space.col-xs-10.col-xs-offset-1.col-sm-6.col-sm-offset-0.col-md-6.col-md-offset-0.book-container
+        div.thumbnail.thumbnail-height
+          a.viewable-link(viewable-link url='story.bookUrl', viewable='story.availableForViewing', term-id='story.termId', term-index='story.termIndex')
+            img.lock(src='/images/lock.png', ng-show='!story.availableForViewing')
+            img.new(src='/images/new.png', ng-show='story.isNew && story.availableForViewing')
+            img(ng-src='/images/stories/{{story.thumbnailsSrc[0]}}', ng-class='{translucent: !story.availableForViewing}')
+          div.caption
+            h4 {{ story.termIndex + 1}}. {{ story.chineseTitle }} ({{ story.title }})
+            p.hidden-xs
+              span {{ long ? story.description : (story.description | truncate:200) }} 
+              a(href='', ng-show='story.description.length > 200', ng-click='long = !long') {{ long ? 'Show Less' : 'Read More' }}
+

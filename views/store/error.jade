@@ -1,0 +1,15 @@
+extends ../corporate-layout
+
+block content
+  .row.no-fade
+    .col-sm-offset-4.col-sm-4
+      h1.center  Store Error
+      br
+      br
+      - var code = "Code: " + error.httpStatusCode;
+      - var description = JSON.stringify(error, null, 2);
+      h2= code
+      pre
+        p= description
+      a(href='/')
+        button Backe

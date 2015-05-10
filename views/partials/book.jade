@@ -1,0 +1,103 @@
+div.book
+  h3.center 
+    | {{ data.story.title }} ({{ data.story.chineseTitle }}) 
+    ul(style='list-style:none;padding:0;display:inline')
+      li.star-container(ng-repeat='star in [0, 1, 2]', ng-class='{completed: data.storyRecord.bestStarsScore[data.storyRecord.currLevel] > $index}')
+        img(src='/images/star.png')
+
+  div#video_container.wistia_embed.margin-centered(wistia-embed codes='data.story.code', kid-id='data.currentKid._id', term-index='data.story.termIndex', term-id='data.story.termId', adjust-video-size, prevent-right-click, ng-show='data.story.availableForViewing')
+  div.denied-access(ng-show='!data.story.availableForViewing')
+    img(ng-src='/images/stories/{{ data.story.thumbnailsSrc[0] }}')
+    div.buy
+      button.btn-primary
+        a(href='/portal/store', ng-click='buyBook()') Book Not Purchased. Buy It Now!
+
+  br
+  div.container-fluid.middle-section
+    .row.no-fade
+      div.video-controls.col-xs-12.col-md-12
+        img.arrow.back-arrow(src='/images/back-arrow.png', ng-class='{disabled: data.index === 0}', ng-click='getStory(false)')
+        img.quiz(src='/images/quiz.png', ng-click='openModal()', ng-show='data.story.availableForViewing && data.story.keywordsTaught.length > 0')
+        img.arrow.forward-arrow(src='/images/back-arrow.png', ng-class='{disabled: data.index === data.stories.length - 1}', ng-click='getStory(true)')
+        //- button.btn.btn-primary(ng-show='options.noSubtitlesOptionExist', ng-click='toggleSubtitles()') {{ options.subtitles === 'englishSubtitles' ? 'No Subs' : 'Eng Subs' }}
+      
+      //- ul.coins.col-xs-4.col-md-3(ng-class='{"blank-coin": options.bookRead}')
+      //-   li
+      //-     img(ng-src='/images/coin_small.png')
+
+    script(type='text/ng-template', id='quizModal.html')
+      div.modal-header
+        h3.modal-title Quiz ({{ data.title }})
+      
+      div.modal-body
+        div.center(ng-show='data.status === "startScreen"')
+          button.btn.btn-primary(ng-disabled='data.loading') Loading...
+        div(ng-show='data.status === "running"')
+          div
+            b Question: 
+            | {{ data.numberOfQuestionsAsked }} / {{ data.totalNumberofQuestions }}
+          // depending on what type of quiz is being tested, show different things
+          div.question(ng-show='data.currQuestion.questionType === "wordRecognition"') {{ data.currQuestion.answer }}
+          div.question(ng-show='data.currQuestion.questionType === "pictureRecognition"')
+            img(ng-src='{{ getSrc("/images/keywords/", data.currQuestion.imageSrc + ".png") }}')
+
+          ul(ng-show='!data.choicesDisabled')
+            li(ng-repeat='choice in data.currQuestion.choices', ng-click='selectChoice(choice)')
+              div(ng-show='data.currQuestion.questionType === "wordRecognition"')
+                button.btn.choices(ng-class='{"btn-primary": data.selectedChoice === choice, "btn-info": data.selectedChoice !== choice}', ng-disabled='data.choicesDisabled') {{ ['A', 'B', 'C', 'D'][$index] }}
+
+              div(ng-show='data.currQuestion.questionType === "pictureRecognition"')
+                button.btn.choices(ng-class='{"btn-primary": data.selectedChoice === choice, "btn-info": data.selectedChoice !== choice}', ng-disabled='data.choicesDisabled') {{ choice }}
+                    
+          div.center(ng-show='data.choicesDisabled')
+            div(ng-show='data.answeredCorrectly')
+              h2 Correct!
+            
+            div(ng-show='!data.answeredCorrectly')
+              h2(ng-show='data.currQuestion.questionType === "pictureRecognition"') {{ data.currQuestion.answer }}
+              h2 Try Again Later
+
+        div.center(ng-show='data.status === "endScreen"')
+          h2 You have completed the quiz! 
+          h2 You win
+          img(src='/images/coin.png')
+          div.score
+            h2 Score: 
+            ul
+              li.quiz-results(ng-repeat='star in [0, 1, 2]', ng-class='{completed: data.starsObtainedFromQuiz > $index}')
+                img(src='/images/star.png')
+          br
+          div.score
+            h2 Best Score: 
+            ul
+              li.quiz-results(ng-repeat='star in [0, 1, 2]', ng-class='{completed: data.bestStarsScore > $index}')
+                img(src='/images/star.png')
+
+      div.modal-footer
+        button.btn.btn-primary(ng-click='evaluateAnswer()', ng-show='data.status === "running" && !data.choicesDisabled') Submit Answer
+        button.btn.btn-primary(ng-click='closeModal()', ng-show='data.status === "endScreen"') End
+
+  br
+  button.btn.btn-primary(ng-click='updateBookLevel()', ng-show='data.story.keywordsTaught.length > 0 && data.story.availableForViewing') {{ data.storyRecord.currLevel === 'elementary' ? 'Change to Intermediate' : 'Change to Elementary' }}
+
+  h4 Story Summary:
+  p.left {{ data.story.description }}
+  hr
+  div.left(ng-show='data.story.availableForViewing')
+    div(ng-show='data.story.keywordsTaught.length > 0 && data.keywordsLoaded')
+      h4 Lesson Keywords:
+      ol
+        li(ng-repeat='keyword in data.story.keywordsTaught') 
+          div.keywords
+            div
+              strong {{ keyword.simplifiedChar }} &nbsp;
+              a(href='', play-sound sound-id='{{ keyword.simplifiedChar }}')  
+                span [{{ keyword.meaning.pinyin }}] &nbsp;
+                span.glyphicon.glyphicon-volume-up
+            em
+              b Definition:  
+            | {{ keyword.meaning.definition }}
+            br
+          div(ng-repeat='image in keyword.meaning.explainerImagesSrc')
+            img.keyword-image(ng-src='{{ getSrc("/images/keywords/", image + ".png") }}')
+          br
